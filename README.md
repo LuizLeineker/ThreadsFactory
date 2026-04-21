@@ -1,0 +1,2 @@
+# ThreadsFactory
+Fabrica -> Loja -> Clientes

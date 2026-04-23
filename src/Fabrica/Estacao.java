@@ -2,12 +2,12 @@ package Fabrica;
 
 import java.util.concurrent.Semaphore;
 
-public class Station {
+public class Estacao {
     private int id;
-    private Functionary[] funcionarios = new Functionary[5]; // 5 ferramentas para 5 funcionarios
+    private Funcionario[] funcionarios = new Funcionario[5]; // 5 ferramentas para 5 funcionarios
     private Semaphore[] ferramentas = new Semaphore[5];
 
-    public Station(int id, BufferCircular buffer, Semaphore esteiraPecas, Semaphore estoquePecas){
+    public Estacao(int id, BufferCircular buffer, Semaphore esteiraPecas, Semaphore estoquePecas){
 
         this.id = id;
 
@@ -19,12 +19,12 @@ public class Station {
             Semaphore esquerda = ferramentas[i];
             Semaphore direita = ferramentas[(i + 1) % 5];
 
-            funcionarios[i] = new Functionary(i, id, esquerda, direita, buffer, esteiraPecas, estoquePecas);
+            funcionarios[i] = new Funcionario(i, id, esquerda, direita, buffer, esteiraPecas, estoquePecas);
         }
     }
 
     public void iniciar(){
-        for (Functionary f : funcionarios){
+        for (Funcionario f : funcionarios){
             f.start();
         }
     }

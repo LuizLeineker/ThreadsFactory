@@ -1,16 +1,22 @@
 package Fabrica;
 
-public class Vehicle {
+import java.io.Serializable;
+
+public class Veiculo  implements Serializable {
     private static int contador = 0;
 
     private int id;
     private String rgb;
     private String tipo;
-    private int idEstacao;
-    private int idFuncionario;
+    public int idEstacao;
+    public int idFuncionario;
+    public int idLoja;
+    public int posLoja;
 
-    public Vehicle(int idEstacao, int idFuncionario) {
+    public Veiculo(int idEstacao, int idFuncionario) {
+        synchronized (Veiculo.class) {
         this.id = ++contador;
+    }
 
         String[] rgbs = {"255, 0, 0", "0, 255, 0", "0, 0, 255", "255, 165, 0", "10, 10, 10"};
         String[] tipos = {"SUV", "SEDAN"};

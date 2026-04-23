@@ -1,28 +1,42 @@
 package LojaCliente;
 
-import java.util.Random;
+import Fabrica.Veiculo;
 
 public class Main {
     public static void main(String[] args) {
-        JavaServer[] lojas = { new JavaServer(1), new JavaServer(2), new JavaServer(3) };
 
+        JavaServer[] lojas = {
+            new JavaServer(1),
+            new JavaServer(2),
+            new JavaServer(3)
+        };
+
+        // Clientes
         for (int i = 1; i <= 20; i++) {
-            new ClienteThread(i, lojas).start();
+            new Cliente(i, lojas).start();
         }
 
+        // Thread que recebe da fábrica
         new Thread(() -> {
             try {
-                int idSeq = 1;
-                String[] cores = {"Red", "Green", "Blue"};
-                String[] tipos = {"SUV", "SEDAN"};
-                Random r = new Random();
+                java.net.Socket socket = new java.net.Socket("localhost", 5000);
+                java.io.ObjectInputStream in = new java.io.ObjectInputStream(socket.getInputStream());
+
+                java.util.Random rand = new java.util.Random();
+
+                System.out.println("Conectado à fábrica!");
+
                 while (true) {
-                    Veiculo v = new Veiculo(idSeq++, cores[idSeq % 3], tipos[idSeq % 2],
-                            r.nextInt(4)+1, r.nextInt(5)+1, r.nextInt(40));
-                    lojas[r.nextInt(3)].receberDaFabrica(v);
-                    Thread.sleep(1000);
+                    Veiculo v = (Veiculo) in.readObject();
+
+                    lojas[rand.nextInt(3)].receberDaFabrica(v);
+
+                    Thread.sleep(50); // controle leve
                 }
-            } catch (Exception e) { e.printStackTrace(); }
+
+            } catch (Exception e) {
+                System.out.println("Erro na conexão com a fábrica.");
+            }
         }).start();
     }
 }

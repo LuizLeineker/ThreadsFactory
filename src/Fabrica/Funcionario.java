@@ -2,7 +2,7 @@ package Fabrica;
 
 import java.util.concurrent.Semaphore;
 
-public class Functionary extends Thread {
+public class Funcionario extends Thread {
     private int id;
     private int idEstacao;
 
@@ -13,7 +13,7 @@ public class Functionary extends Thread {
     private Semaphore esteiraPecas;
     private Semaphore estoquePecas;
 
-    public Functionary(int id, int idEstacao, Semaphore esquerda, Semaphore direita, BufferCircular buffer, Semaphore esteiraPecas, Semaphore estoquePecas){
+    public Funcionario(int id, int idEstacao, Semaphore esquerda, Semaphore direita, BufferCircular buffer, Semaphore esteiraPecas, Semaphore estoquePecas){
         this.id = id;
         this.idEstacao = idEstacao;
         this.esquerda = esquerda;
@@ -43,7 +43,7 @@ public class Functionary extends Thread {
                 }
 
                 // Produção
-                Vehicle v = new Vehicle(idEstacao, id);
+                Veiculo v = new Veiculo(idEstacao, id);
                 int posicao = buffer.inserir(v);
 
                 // LOG PRODUÇÃO
@@ -58,7 +58,7 @@ public class Functionary extends Thread {
                 direita.release();
                 esteiraPecas.release();
 
-                Thread.sleep(300);
+                Thread.sleep(800);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

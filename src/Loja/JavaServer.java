@@ -1,4 +1,4 @@
-package LojaCliente;
+package Loja;
 
 import Fabrica.Veiculo;
 import java.util.concurrent.Semaphore;

@@ -1,6 +1,8 @@
-package LojaCliente;
+package Cliente;
 
 import Fabrica.Veiculo;
+import Loja.JavaServer;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

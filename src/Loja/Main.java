@@ -8,9 +8,9 @@ import java.net.Socket;
 
 public class Main {
     public static void main(String[] args) {
-        JavaServer estoqueLoja = new JavaServer(1); // ID da Loja
+        JavaServer estoqueLoja = new JavaServer(1);
 
-        // THREAD 1: Conecta na Fábrica para puxar veículos
+
         new Thread(() -> {
             try (Socket socketFabrica = new Socket("localhost", 5000);
                  ObjectInputStream in = new ObjectInputStream(socketFabrica.getInputStream())) {
@@ -25,7 +25,7 @@ public class Main {
             }
         }).start();
 
-        // THREAD 2: Abre servidor para os Clientes
+
         try (ServerSocket servidorLoja = new ServerSocket(6000)) {
             System.out.println("[LOJA] Servidor da Loja pronto na porta 6000...");
 

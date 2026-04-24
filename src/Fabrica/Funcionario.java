@@ -28,12 +28,12 @@ public class Funcionario extends Thread {
         try {
             while (true) {
 
-                // Pegar peça (controle estoque 500 + 5 simultâneos)
+
                 esteiraPecas.acquire();
                 estoquePecas.acquire();
 
-                // pega as duas peças para começar a produçaõ do carro
-                // Evita deadlock (ordem alternada)
+
+
                 if (id % 2 == 0) {
                     esquerda.acquire();
                     direita.acquire();
@@ -42,11 +42,11 @@ public class Funcionario extends Thread {
                     esquerda.acquire();
                 }
 
-                // Produção
+
                 Veiculo v = new Veiculo(idEstacao, id);
                 int posicao = buffer.inserir(v);
 
-                // LOG PRODUÇÃO
+
                 System.out.println(
                         "[PRODUÇÃO VEICULO] ID:" + v.getId() + " RGB:" + v.getCor() + " TIPO:" + v.getTipo() +
                         " ESTACAO:" + v.getIdEstacao() + " FUNCIONARIO:" + v.getIdFuncionario() + " POSICAO BUFFER:" + posicao + "\n"

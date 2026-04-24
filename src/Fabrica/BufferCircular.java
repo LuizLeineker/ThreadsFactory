@@ -2,7 +2,7 @@ package Fabrica;
 import java.util.concurrent.Semaphore;
 
 public class BufferCircular {
-    private Veiculo[] buffer = new Veiculo[40];  //buffer com capacidade de 40
+    private Veiculo[] buffer = new Veiculo[40];
     private int in = 0, out = 0;
 
     private Semaphore cheio = new Semaphore(0);

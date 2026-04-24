@@ -4,7 +4,7 @@ import java.util.concurrent.Semaphore;
 
 public class Estacao {
     private int id;
-    private Funcionario[] funcionarios = new Funcionario[5]; // 5 ferramentas para 5 funcionarios
+    private Funcionario[] funcionarios = new Funcionario[5];
     private Semaphore[] ferramentas = new Semaphore[5];
 
     public Estacao(int id, BufferCircular buffer, Semaphore esteiraPecas, Semaphore estoquePecas){

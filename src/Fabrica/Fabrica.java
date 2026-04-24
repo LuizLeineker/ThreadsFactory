@@ -10,18 +10,18 @@ public class Fabrica {
 
         BufferCircular buffer = new BufferCircular();
 
-        Semaphore estoquePecas = new Semaphore(500); // 500 unidades
-        Semaphore esteiraPecas = new Semaphore(5);   // 5 simultâneos
+        Semaphore estoquePecas = new Semaphore(500);
+        Semaphore esteiraPecas = new Semaphore(5);
 
         Estacao[] estacoes = new Estacao[4];
 
-        // Inicia as 4 estações
+
         for (int i = 0; i < 4; i++) {
             estacoes[i] = new Estacao(i, buffer, esteiraPecas, estoquePecas);
             estacoes[i].iniciar();
         }
 
-        // ================= SOCKET SERVER =================
+
         ServerSocket servidor = new ServerSocket(5000);
         System.out.println("Fabrica pronta para conexões...");
 
@@ -37,7 +37,7 @@ public class Fabrica {
                     while (true) {
                         Veiculo v = buffer.remover();
 
-                        // LOG COMPLETO (igual exigência da prova)
+
                         System.out.println(
                             "[VENDA PARA LOJA] " +
                             "ID:" + v.getId() +
